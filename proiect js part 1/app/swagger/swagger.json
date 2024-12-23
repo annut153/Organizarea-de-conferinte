@@ -1,0 +1,95 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Conferințe API",
+      "description": "API pentru gestionarea conferințelor, articolelor și review-urilor",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000"
+      }
+    ],
+    "paths": {
+      "/api/conferences": {
+        "get": {
+          "summary": "Obține lista tuturor conferințelor",
+          "responses": {
+            "200": {
+              "description": "Listă de conferințe",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Conference"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/articles": {
+        "post": {
+          "summary": "Creează un articol nou",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Article"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Articol creat cu succes"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Conference": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            },
+            "date": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": {
+              "type": "string"
+            }
+          }
+        },
+        "Article": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            },
+            "authorId": {
+              "type": "integer"
+            },
+            "conferenceId": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    }
+  }
+  
